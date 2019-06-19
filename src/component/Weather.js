@@ -36,7 +36,7 @@ class Weather extends Component {
               />
             )}
             <span>{this.props.description}</span>
-            {this.props.city && <h3>{this.props.temperature} °</h3>}
+            {this.props.city && <h3>{this.props.temperature} ° C</h3>}
           </div>
 
           <div className="list-group ">
@@ -47,9 +47,9 @@ class Weather extends Component {
                   style={bgStyle}
                 >
                   Temperature:{" "}
-                  {this.props.temperature && (
+                  {this.props.F && (
                     <span className="badge badge-primary badge-pill">
-                      {this.props.temperature}
+                      {this.props.F} F
                     </span>
                   )}
                 </li>

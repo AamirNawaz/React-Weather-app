@@ -5,12 +5,15 @@ import Titles from "./component/Titles";
 import Form from "./component/Form";
 import Weather from "./component/Weather";
 var moment = require("moment");
+const kelvinToFahrenheit = require("kelvin-to-fahrenheit");
+var fahrenheitToCelsius = require("fahrenheit-to-celsius");
 
 const API_KEY = "6c6f96bccd934ef9358065c8ab36fce2";
 
 class App extends React.Component {
   state = {
     temperature: "",
+    F: "",
     city: "",
     country: "",
     humidity: "",
@@ -41,9 +44,12 @@ class App extends React.Component {
 
       var sunsetConverted = moment(data.sys.sunset).format("HH:mm:ss");
 
+      var temp = kelvinToFahrenheit(data.main.temp);
+      var Celsius = fahrenheitToCelsius(temp);
       //set state
       this.setState({
-        temperature: data.main.temp,
+        temperature: Celsius,
+        F: temp,
         city: data.name,
         country: data.sys.country,
         humidity: data.main.humidity,
@@ -64,6 +70,7 @@ class App extends React.Component {
       //if error setState all to null and put error message
       this.setState({
         temperature: "",
+        F: "",
         city: "",
         country: "",
         humidity: "",
@@ -104,6 +111,7 @@ class App extends React.Component {
           error={this.state.error}
           ResultSection={this.state.ResultSection}
           visibility={this.state.visibility}
+          F={this.state.F}
         />
       </div>
     );

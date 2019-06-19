@@ -20,7 +20,6 @@ class Weather extends Component {
           {this.props.description && (
             <li>Description:{this.props.description}</li>
           )}
-          {this.props.error && <p>{this.props.error}</p>}
         </ul>
       </div>
     );

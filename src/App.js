@@ -1,4 +1,5 @@
 import React from "react";
+import "bootstrap/dist/css/bootstrap.css";
 
 import Titles from "./component/Titles";
 import Form from "./component/Form";
@@ -21,13 +22,12 @@ class App extends React.Component {
     const cityName = event.target.elements.city.value;
     const countryName = event.target.elements.country.value;
 
-    const api_call = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryName}&APPID=${API_KEY}`
-    );
+    if (cityName !== "" && countryName !== "") {
+      const api_call = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryName}&APPID=${API_KEY}`
+      );
+      const data = await api_call.json();
 
-    const data = await api_call.json();
-
-    if (cityName && countryName) {
       //set state
       this.setState({
         temperature: data.main.temp,
@@ -52,10 +52,10 @@ class App extends React.Component {
   };
 
   render() {
-    http: return (
+    return (
       <div className="App">
         <Titles />
-        <Form getWeather={this.getWeather} />
+        <Form getWeather={this.getWeather} error={this.state.error} />
 
         <Weather
           temperature={this.state.temperature}

@@ -40,12 +40,13 @@ class App extends React.Component {
         `https://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryName}&APPID=${API_KEY}`
       );
       const data = await api_call.json();
+
       var sunriseConverted = moment(data.sys.sunrise).format("HH:mm:ss");
 
       var sunsetConverted = moment(data.sys.sunset).format("HH:mm:ss");
 
       var temp = kelvinToFahrenheit(data.main.temp);
-      var Celsius = fahrenheitToCelsius(temp);
+      var Celsius = Math.round(fahrenheitToCelsius(temp));
       //set state
       this.setState({
         temperature: Celsius,
